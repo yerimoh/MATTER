@@ -2,9 +2,9 @@ import pandas as pd
 from collections import Counter
 
 # Define file paths
-mf_csv_path = "/mnt/user25/Material_tokenizer/04.Material_Tokenizer/02.Tokenizer/MatSciBERT/tokenizer/DMM/final/mf.csv"
-matname_csv_path = "/mnt/user25/Material_tokenizer/04.Material_Tokenizer/02.Tokenizer/MatSciBERT/tokenizer/DMM/final/matname.csv"
-o_tags_path = "/mnt/user25/Material_tokenizer/04.Material_Tokenizer/02.Tokenizer/MatSciBERT/tokenizer/DMM/final/o_tags.txt"
+mf_csv_path = "/mf.csv"
+matname_csv_path = "/matname.csv"
+o_tags_path = "/o_tags.txt"
 
 # Define output file paths
 output_mf_path = "matterm_word_frequent.csv"
