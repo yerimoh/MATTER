@@ -47,7 +47,7 @@ bash run.sh
 cd eval/classification/
 ```
 
-#### ner
+#### NER
 ```python
 cd ner
 # If the model uses a BPE-based tokenizer, run.sh with ner_BPE.py
@@ -63,7 +63,7 @@ cd relation_classification
 run.sh
 ```
 
-#### cls
+#### CLS
 
 ```python
 cd cls
