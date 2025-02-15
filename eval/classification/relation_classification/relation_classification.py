@@ -48,27 +48,13 @@ parser.add_argument('--lm_lrs', nargs='+', default=None, type=float)
 parser.add_argument('--non_lm_lr', default=3e-4, type=float)
 args = parser.parse_args()
 
-if args.model_name == 'scibert':
-    model_name = 'allenai/scibert_scivocab_uncased'
-    to_normalize = False
-elif args.model_name == 'matscibert':
-    model_name = 'm3rg-iitd/matscibert'
+if args.model_name == 'WordPiece':
+    model_name = 'FIX/checkpoint-100000'
     to_normalize = True
-elif args.model_name == 'bert':
-    model_name = 'bert-base-uncased'
-    to_normalize = False
-elif args.model_name == 'lamda2_1.0':
-    model_name = '/home/user25/WorkSpace/MatTokenization/05.pretraining/MatSciBERT/pretraining/last/lamda2/1.0/checkpoint-100000'
+elif args.model_name == 'MATTER':
+    model_name = 'FIX/checkpoint-100000'
     to_normalize = True
-elif args.model_name == 'sage':
-    model_name = '/home/user25/WorkSpace/MatTokenization/05.pretraining/MatSciBERT/ner/model_innal/sage/checkpoint-100000'
-    to_normalize = False
-elif args.model_name == 'wp':
-    model_name = '/home/user25/WorkSpace/MatTokenization/05.pretraining/MatSciBERT/ner/model_innal/WP/checkpoint-100000'
-    to_normalize = False
-elif args.model_name == 'PickyBPE':
-    model_name = '/home/user25/WorkSpace/MatTokenization/05.pretraining/MatSciBERT/pretraining/last/picky_0.9/resultt/checkpoint-100000'
-    to_normalize = True
+
 else:
     raise NotImplementedError
 
@@ -82,7 +68,7 @@ if args.seeds is None:
 if args.lm_lrs is None:
     args.lm_lrs = [2e-5, 3e-5, 5e-5]
 
-data_dir = '/home/user25/WorkSpace/MatTokenization/05.pretraining/MatSciBERT/relation_classification/datasets/annotated-materials-syntheses'
+data_dir = '/datasets/annotated-materials-syntheses'
 #####################
 # save result
 txt_name = f"{args.model_name}_{args.seeds}"
