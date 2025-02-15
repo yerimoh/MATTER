@@ -63,21 +63,13 @@ parser.add_argument('--fold_num', default=None, type=int)
 parser.add_argument('--hidden_dim', default=300, type=int)
 args = parser.parse_args()
 
-if args.model_name == 'scibert':
-    model_name = 'allenai/scibert_scivocab_uncased'
-    to_normalize = False
-elif args.model_name == 'matscibert':
-    model_name = 'm3rg-iitd/matscibert'
+if args.model_name == 'WordPiece':
+    model_name = 'FIX/checkpoint-100000'
     to_normalize = True
-elif args.model_name == 'bert':
-    model_name = 'bert-base-uncased'
-    to_normalize = False
-elif args.model_name == 'New':
-    model_name = '/home/user25/Work_Space/personal_work/05.pretraining/MatSciBERT/pretraining/A_uncased/result/128_lower/checkpoint-100000'  # 새로운 모델 경로
-    to_normalize = False
-elif args.model_name == 'MatSciBERT_100000':
-    model_name = '/home/user25/Work_Space/Material_aware_LM/error_MatSciBERT/MatSciBERT/ner/model/MatSciBERT/checkpoint-100000/pytorch_model.bin'
+elif args.model_name == 'MATTER':
+    model_name = 'FIX/checkpoint-100000'
     to_normalize = True
+
 else:
     raise NotImplementedError
 
