@@ -49,26 +49,17 @@ parser.add_argument('--lm_lrs', nargs='+', default=None, type=float)
 parser.add_argument('--non_lm_lr', default=3e-4, type=float)
 args = parser.parse_args()
 
-if args.model_name == 'scibert':
-    model_name = 'allenai/scibert_scivocab_uncased'
-    to_normalize = False
-elif args.model_name == 'matscibert':
-    model_name = 'm3rg-iitd/matscibert'
+if args.model_name == 'BPE':
+    model_name = 'FIX/checkpoint-100000'
+    tokenizer_path = 'FIX'
     to_normalize = True
-elif args.model_name == 'bert':
-    model_name = 'bert-base-uncased'
-    to_normalize = False
-elif args.model_name == 'lamda2_1.0':
-    model_name = '/home/user25/WorkSpace/MatTokenization/05.pretraining/MatSciBERT/pretraining/last/lamda2/1.0/checkpoint-100000'
+elif args.model_name == 'SAGE':
+    model_name = 'FIX/checkpoint-100000'
+    tokenizer_path = 'FIX'
     to_normalize = True
-elif args.model_name == 'sage':
-    model_name = '/home/user25/WorkSpace/MatTokenization/05.pretraining/MatSciBERT/ner/model_innal/sage/checkpoint-100000'
-    to_normalize = False
-elif args.model_name == 'wp':
-    model_name = '/home/user25/WorkSpace/MatTokenization/05.pretraining/MatSciBERT/ner/model_innal/WP/checkpoint-100000'
-    to_normalize = False
 elif args.model_name == 'PickyBPE':
-    model_name = '/home/user25/WorkSpace/MatTokenization/05.pretraining/MatSciBERT/relation_classification/model_bpe/checkpoint-100000'
+    model_name = 'FIX/checkpoint-100000'
+    tokenizer_path = 'FIX'
     to_normalize = True
 else:
     raise NotImplementedError
@@ -201,20 +192,17 @@ class CustomTokenizerWrapper(PreTrainedTokenizerFast):
         return str(vocab_path), str(merges_path)
 
 
-if args.model_name == 'PickyBPE':
-    # Load the PickyBPE tokenizer
-    tokenizer_path = "/home/user25/WorkSpace/MatTokenization/05.pretraining/MatSciBERT/relation_classification/model_bpe/BPE"
-    tokenizer = CustomTokenizerWrapper(
-        tokenizer_object=ByteLevelBPETokenizer.from_file(
-            vocab_filename=os.path.join(tokenizer_path, "vocab.json"),
-            merges_filename=os.path.join(tokenizer_path, "merges.txt")
-        )
+
+
+tokenizer = CustomTokenizerWrapper(
+    tokenizer_object=ByteLevelBPETokenizer.from_file(
+        vocab_filename=os.path.join(tokenizer_path, "vocab.json"),
+        merges_filename=os.path.join(tokenizer_path, "merges.txt")
     )
+)
 
-    tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 
-else:
-    tokenizer = AutoTokenizer.from_pretrained(model_name, **tokenizer_kwargs)
 
 tokenizer.add_tokens(['[E1]', '[/E1]', '[E2]', '[/E2]'])
 
