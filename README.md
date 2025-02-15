@@ -1,7 +1,7 @@
 # MATTER
 This repository contains code for the paper "Incorporating Material Domain Knowledge into Subword Vocabularies for Language Model Adaptation to Materials Science"
 
----
+----
 
 ## Training
 
