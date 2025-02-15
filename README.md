@@ -9,8 +9,9 @@ For training you should use bpe_trainer.py script. For example, the following co
 
 
 ### Installing requirements
-
-'''
+```python
 cd code
 bash install_requirements.sh
-'''
+```
+
+
