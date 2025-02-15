@@ -96,16 +96,10 @@ def tokenize(df,max_length=512,tokenizer=None):
 
     data_tokens = tokenizer(texts, questions, truncation=True, padding='max_length', max_length=max_length, return_tensors='pt')
     answer_tokens = tokenizer(answers, truncation=True, padding='max_length', max_length=max_length, return_tensors='pt')
-    # 각 변수의 일부를 출력하여 확인
-    print("Data Tokens - input_ids (일부):", data_tokens['input_ids'][:2])
-    print("Data Tokens - attention_mask (일부):", data_tokens['attention_mask'][:2])
-    print("Answer Tokens - input_ids (일부):", answer_tokens['input_ids'][:2])
-    print("Answer Tokens - attention_mask (일부):", answer_tokens['attention_mask'][:2])
-    print("Qtypes (일부):", qtypes[:5])
     return [data_tokens, answer_tokens, qtypes]
 
 def load_matscholar(explanation = 0, res_dict = None):
-    path = '/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/dataset/matscholar.json'.format(dir_path)
+    path = 'dataset/matscholar.json'.format(dir_path)
     df = pd.read_json(path, orient='split')
     text_list = []
     question_list = []
@@ -148,7 +142,7 @@ def load_matscholar(explanation = 0, res_dict = None):
     return (text_list, question_list, answer_list, qtype_list)
 
 def load_sofc_token(explanation = 0, res_dict = None):
-    path = '/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/dataset/sofc_token.json'.format(dir_path)
+    path = 'sofc_token.json'.format(dir_path)
     df = pd.read_json(path, orient='split')
     text_list = []
     question_list = []
@@ -214,7 +208,7 @@ def load_sofc_token(explanation = 0, res_dict = None):
     return (text_list, question_list, answer_list, qtype_list)
 
 def load_synthesis_procedures(explanation = 0, res_dict = None):
-    path = '/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/dataset/synthesis_procedures.json'.format(dir_path)
+    path = 'dataset/synthesis_procedures.json'.format(dir_path)
     f = open(path)
     data_dict = json.load(f)
     items = data_dict['data']
@@ -335,7 +329,7 @@ def load_synthesis_procedures(explanation = 0, res_dict = None):
     return (text_list, question_list, answer_list, qtype_list)
 
 def load_sc_comics(explanation = 0, res_dict = None):
-    path = '/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/dataset/sc_comics.json'.format(dir_path)
+    path = 'dataset/sc_comics.json'.format(dir_path)
     f = open(path)
     data_dict = json.load(f)
     items = data_dict['data']
@@ -456,7 +450,7 @@ def load_sc_comics(explanation = 0, res_dict = None):
     return (text_list, question_list, answer_list, qtype_list)
 
 def load_glass(explanation = 0, res_dict = None):
-    path = '/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/dataset/glass_non_glass.json'.format(dir_path)
+    path = 'glass_non_glass.json'.format(dir_path)
     df = pd.read_json(path, orient='split')
     text_list = []
     question_list = []
@@ -490,7 +484,7 @@ def load_glass(explanation = 0, res_dict = None):
     return (text_list, question_list, answer_list, qtype_list)
 
 def load_re(explanation = 0, res_dict = None):
-    path = '/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/dataset/structured_re.json'.format(dir_path)
+    path = 'dataset/structured_re.json'.format(dir_path)
     data = open(path).read().strip().split('\n')
     text_list = []
     question_list = []
@@ -533,7 +527,7 @@ def load_re(explanation = 0, res_dict = None):
     return (text_list, question_list, answer_list, qtype_list)
 
 def load_synthesis_actions(explanation = 0, res_dict = None):
-    path = '/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/dataset/synthesis_actions.json'.format(dir_path)
+    path = 'synthesis_actions.json'.format(dir_path)
     data = json.load(open(path))
     text_list = []
     question_list = []
@@ -581,7 +575,7 @@ def load_synthesis_actions(explanation = 0, res_dict = None):
     return (text_list, question_list, answer_list, qtype_list)
 
 def load_sofc_sent(explanation = 0, res_dict = None):
-    path = '/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/dataset/sofc_sent.json'.format(dir_path)
+    path = 'sofc_sent.json'.format(dir_path)
     df = pd.read_json(path, orient='split')
     text_list = []
     question_list = []
@@ -840,76 +834,38 @@ def get_res_dict(df):
 def build_dataloader(max_length = 512, batch_size = 4, tasks = [0,1,2,3,4,5,6], explanation = 0, setting = 'ood', train_size = 0.25, base_model = 'matscibert', explanation_type = 'choice', even_split = False):
     datasets = ['matscholar.json','sofc_token.json','synthesis_procedures.json','sc_comics.json','glass_non_glass.json','structured_re.json','synthesis_actions.json','sofc_sent.json']
     lower = True
-    if (base_model=='matscibert'):
-        tokenizer = AutoTokenizer.from_pretrained("m3rg-iitd/matscibert")
-    elif (base_model=='matbert'):
-        # can be download from https://github.com/lbnlp/MatBERT
-        tokenizer = AutoTokenizer.from_pretrained("./matbert-base-uncased")
-    elif (base_model=='scibert'):
-        tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
-    elif (base_model=='scholarbert'):
-        tokenizer = AutoTokenizer.from_pretrained('globuslabs/ScholarBERT_1')
-        lower = False
-    elif (base_model=='biobert'):
-        tokenizer = AutoTokenizer.from_pretrained('seiya/oubiobert-base-uncased')
-    elif (base_model=='batterybert'):
-        tokenizer = AutoTokenizer.from_pretrained('batterydata/batterybert-uncased')
-    elif (base_model=='BPE'):
-        # BPE 토크나이저 로드
-        tokenizer_path = "/mnt/user25/Material_tokenizer/04.Material_Tokenizer/02.Tokenizer/MatSciBERT/tokenizer/cased/200000_noise_no_noise/BPE"
+    if (base_model=='BPE'):
+        tokenizer_path = "FIX"
         tokenizer = ByteLevelBPETokenizer.from_file(
             vocab_filename=os.path.join(tokenizer_path, "vocab.json"),
             merges_filename=os.path.join(tokenizer_path, "merges.txt")
         )
-    elif (base_model=='BPE2'):
-        # BPE 토크나이저 로드
-        tokenizer_path = "/mnt/user25/Material_tokenizer/04.Material_Tokenizer/02.Tokenizer/MatSciBERT/tokenizer/cased/200000_noise_no_noise/BPE"
-        tokenizer = ByteLevelBPETokenizer.from_file(
-            vocab_filename=os.path.join(tokenizer_path, "vocab.json"),
-            merges_filename=os.path.join(tokenizer_path, "merges.txt")
-        )
+    elif (base_model=='WordPiece'):
+        tokenizer = AutoTokenizer.from_pretrained("FIX/checkpoint-100000")
     elif (base_model=='PickyBPE'):
-        # BPE 토크나이저 로드
-        #tokenizer_path = "/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/result/picky_BPE/vocab"
-        tokenizer_path = "/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/result/picky_0.9/result2"
-
+        tokenizer_path = "FIX"
         tokenizer = ByteLevelBPETokenizer.from_file(
             vocab_filename=os.path.join(tokenizer_path, "vocab.json"),
             merges_filename=os.path.join(tokenizer_path, "merges.txt")
         )
-    elif (base_model=='optimaize'):
-        tokenizer = AutoTokenizer.from_pretrained("/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/result/checkpoint-200000")
-    elif (base_model=='ver2_opt'):
-        tokenizer = AutoTokenizer.from_pretrained("/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/result/ver2_opti/checkpoint-200000")
-    elif (base_model=='MATTER_1.4'):
-        tokenizer = AutoTokenizer.from_pretrained('/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/model/vocab_size_1.4/train/result/checkpoint-100000')
-    elif (base_model=='MATTER_1.3'):
-        tokenizer = AutoTokenizer.from_pretrained('/mnt/user25/Material_tokenizer/06.eval/NLP4MatSci-ACL23/model/vocab_size_1.3/train/result/checkpoint-100000')
-    elif (base_model=='imporve_final_1129'):
-        tokenizer = AutoTokenizer.from_pretrained('/mnt/user25/Material_tokenizer/05.pretraining/MatSciBERT/pretraining/last/improve_final/result_non/checkpoint-200000')
-
-    elif (base_model=='lamda_15'):
-        tokenizer = AutoTokenizer.from_pretrained('/mnt/user25/Material_tokenizer/05.pretraining/MatSciBERT/pretraining/last/lamda/1.5/result/checkpoint-100000')
-
-    elif (base_model=='MATTER_1.5'):
-        tokenizer = AutoTokenizer.from_pretrained('/mnt/user25/Material_tokenizer/05.pretraining/MatSciBERT/pretraining/last/vocab_size/0.5/result/checkpoint-100000')
-
-    elif (base_model=='Chem'):
-        tokenizer = AutoTokenizer.from_pretrained('/mnt/user25/Material_tokenizer/05.pretraining/MatSciBERT/pretraining/last/Chem/result/checkpoint-100000')
-
-
+    elif (base_model=='SAGE'):
+        tokenizer_path = "FIX"
+        tokenizer = ByteLevelBPETokenizer.from_file(
+            vocab_filename=os.path.join(tokenizer_path, "vocab.json"),
+            merges_filename=os.path.join(tokenizer_path, "merges.txt")
+        )
+    elif (base_model=='MATTER'):
+        tokenizer = AutoTokenizer.from_pretrained("FIX/checkpoint-100000")
     else:
         raise ValueError('basemodel invalid!!!')
     
     
-    #if (base_model=='BPE' or base_model=='PickyBPE'): 
     if isinstance(matscibert_tokenizer, ByteLevelBPETokenizer):
 
         # Instead of using convert_tokens_to_ids, use the tokenizer's vocab
         vocab_dict = tokenizer.get_vocab()  # Get the vocabulary as a dictionary
         pad_idx = vocab_dict.get('[PAD]', None)  # Get the index for the [PAD] token, if it exists
         vocab_size = len(vocab_dict)  # Get the size of the vocabulary
-
     else:
         pad_idx = tokenizer.convert_tokens_to_ids('[PAD]')
         vocab_size = tokenizer.vocab_size
@@ -923,9 +879,7 @@ def build_dataloader(max_length = 512, batch_size = 4, tasks = [0,1,2,3,4,5,6], 
     print('train_size = {} test_size = {}'.format(len(train_df),len(test_df)))
     
     
-    #if (base_model=='BPE' or base_model=='PickyBPE'): 
     if isinstance(matscibert_tokenizer, ByteLevelBPETokenizer):
-
         train_data = tokenize_bpe(train_df, max_length, tokenizer)
         test_data  = tokenize_bpe(test_df, max_length, tokenizer)
     else:
