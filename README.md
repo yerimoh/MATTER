@@ -1,5 +1,5 @@
 # MATTER
-This repository contains code for the paper "Incorporating Material Domain Knowledge into Subword Vocabularies for Language Model Adaptation to Materials Science"
+This repository contains code for the paper "Incorporating Domain Knowledge into Materials Tokenization"
 
 ----
 
