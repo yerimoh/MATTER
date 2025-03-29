@@ -1,6 +1,8 @@
 # MATTER
 This repository contains code for the paper "Incorporating Domain Knowledge into Materials Tokenization"
 ![Main Figure](src/main_page.png)
+
+
 ----
 
 ## Training
