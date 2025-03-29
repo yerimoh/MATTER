@@ -2,7 +2,7 @@
 This repository contains code for the paper "Incorporating Domain Knowledge into Materials Tokenization"
 
 
-<img src="src/main.jpg" alt="Main Figure" width="400"/>
+<img src="src/main.jpg" alt="Main Figure" width="600"/>
 
 
 ----
