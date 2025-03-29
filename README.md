@@ -11,8 +11,12 @@ This repository contains code for the paper "Incorporating Domain Knowledge into
 ## Extract Material Concepts with MatDetector
 The training data for **MatDetector**, which extracts material concepts and their probabilities, is only shared as DOIs due to copyright issues. 
 However, with a free API key from Semantic Scholar, you can crawl the papers using those DOIs to get the training data.
+[📄 MatDetector/data/doi.zip](./data/doi.zip)
 
 We’ve included code for crawling, NER, and adding noise to make the data more robust. Using this, you can build an NER dataset and train MatDetector with the provided training script.
+All data-related resources are stored in the following folder:
+
+[📁 MatDetector/data](./data)
 
 To make things easier, we also released a pretrained MatDetector and a demo. If you're using the MATTER framework, you can use this model and the released tokenization code to build a tokenizer for your own corpus.
 
