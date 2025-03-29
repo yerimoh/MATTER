@@ -8,7 +8,7 @@ This repository contains code for the paper "Incorporating Domain Knowledge into
 
 ----
 
-## Extract Material Concepts with MatDetector
+## STEP1 : Extract Material Concepts with MatDetector
 The training data for **MatDetector**, which extracts material concepts and their probabilities, is only shared as DOIs due to copyright issues. 
 However, with a free API key from Semantic Scholar, you can crawl the papers using those DOIs to get the training data.
 
@@ -35,7 +35,7 @@ To make things easier, we also released a pretrained MatDetector and a demo. If 
 
 
 
-## Training
+## STEP2: create MATTER tokenization 
 
 
 
@@ -46,14 +46,15 @@ bash install_requirements.sh
 ```
 
 
-### Tokenization Training
 For MATTER Tokenization training, use this code.     
 you can choose lambda in there.
 ```python
 run_MATTER.sh
 ```
 
-### Training model
+----
+
+## STEP3: Training with MATTER tokenization
 
 ```python
 train.sh
