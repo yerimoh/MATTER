@@ -28,9 +28,9 @@ MatDetector
 
 To make things easier, we also released a pretrained MatDetector and a demo. If you're using the MATTER framework, you can use this model and the released tokenization code to build a tokenizer for your own corpus.
 
-
-
-
+```python
+MatDetector/ckp
+```
 
 ----
 
