@@ -111,7 +111,7 @@ print("Processing completed. Files saved as mf.txt, matname.txt, and o_tags.txt.
 # MATTER Tokenization
 
 
-----
+
 
 
 ## STEP1 : Extract Material Concepts with MatDetector
@@ -138,7 +138,6 @@ To make things easier, we also released a pretrained MatDetector and a demo. If 
 MatDetector/ckp
 ```
 
-----
 
 
 
@@ -168,7 +167,7 @@ train.sh
 ```
 
 
-----
+
 
 ## Eveluation
 
