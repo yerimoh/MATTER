@@ -158,7 +158,7 @@ you can choose lambda in there.
 run_MATTER.sh
 ```
 
-----
+
 
 ## STEP3: Training with MATTER tokenization
 
