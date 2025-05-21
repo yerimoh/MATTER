@@ -1,5 +1,6 @@
 # MATTER
-✨ [ACL 2025] Incorporating Domain Knowledge into Materials Tokenization
+
+###✨ [ACL 2025] Incorporating Domain Knowledge into Materials Tokenization
 
 <div align="center">
   <img src="src/main.jpg" alt="Main Figure" width="600"/>
