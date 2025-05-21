@@ -110,7 +110,9 @@ print("Processing completed. Files saved as mf.txt, matname.txt, and o_tags.txt.
 
 # MATTER Tokenization
 
+
 ----
+
 
 ## STEP1 : Extract Material Concepts with MatDetector
 The training data for **MatDetector**, which extracts material concepts and their probabilities, is only shared as DOIs due to copyright issues. 
