@@ -13,7 +13,7 @@
 
 If you only want to extract material concepts using **MatDetector**, please follow the steps below.
 
-**1.**Download the [MatDetector](https://drive.google.com/file/d/16YePnmrNNZ98PrxsMm3873uVfsROjH-C/view?usp=sharing) checkpoint   
+**1.** Download the [MatDetector](https://drive.google.com/file/d/16YePnmrNNZ98PrxsMm3873uVfsROjH-C/view?usp=sharing) checkpoint   
 **2.** Use the following code to detect material concepts:
 
 
