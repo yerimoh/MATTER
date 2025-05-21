@@ -169,7 +169,7 @@ train.sh
 
 
 
-## Eveluation
+## Evaluation
 
 ### Generation
 
