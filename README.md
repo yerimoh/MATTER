@@ -214,7 +214,7 @@ run.sh
 
 
 ```
-TBD
+Yerim oh et al., Incorporating Domain Knowledge into Materials Tokenization, ACL 2025
 ```
 
 
